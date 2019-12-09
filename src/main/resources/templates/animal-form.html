@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css"
+	integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt"
+	crossorigin="anonymous">
+
+<title>Save Animal</title>
+</head>
+<body>
+	<div class="container">
+		<h3>Animal Directory</h3>
+		<hr>
+		<p class="h4 mb-4">Save Animal</p>
+
+		<form action="#" th:action="@{/animals/save}"
+			th:object="${animal}" method="POST">
+			<!-- add hidden form -->
+			<input type="hidden" th:field="*{id}"/>
+			<input type="text" th:field="*{nickName}"
+				class="form-control mb-4 col-4" placeholder="Nickname">
+			<input type="text" th:field="*{sex}"
+				class="form-control mb-4 col-4" placeholder="Sex">
+			<input type="text" th:field="*{species}"
+				class="form-control mb-4 col-4" placeholder="Species">
+			<input type="text" th:field="*{price}"
+				class="form-control mb-4 col-4" placeholder="Price" title="Price">
+			<input type="text" th:field="*{qty}"
+				class="form-control mb-4 col-4" placeholder="Quantity" title="Quantity">
+			<button type="submit" class="btn btn-info col-2">Save</button>
+		</form>
+		<hr>
+		<a th:href="@{/animals/list}">Back to Animals List</a>
+	</div>
+</body>
+</html>

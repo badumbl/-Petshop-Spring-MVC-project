@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css"
+	integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt"
+	crossorigin="anonymous">
+
+<title>Animals directory</title>
+</head>
+<body>
+	<div class="container">
+		<h3>Animals Directory</h3>
+		<hr>
+
+		<a th:href="@{/animals/showFormForAdd}"
+			class="btn btn-primary btn-sm mb-3" sec:authorize="hasRole('ROLE_ADMIN')">Add Animal</a>
+		<a th:href="@{/users/list}"
+			class="btn btn-secondary btn-sm mb-3" sec:authorize="hasRole('ROLE_ADMIN')">Show Customers</a>
+			 <div sec:authorize="isAuthenticated()" align="right">Logged in as: <span sec:authentication="name"></span>
+			</div>
+			  <div th:object="${session.user}" align="right">
+    <p>Budget: <span th:text="*{budget}" ></span></p> 
+  </div>
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>Nickname</th>
+					<th>Sex</th>
+					<th>Species</th>
+					<th>Price (EUR)</th>
+					<th>Quantity</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="tempAnimal: ${animals}">
+
+					<td th:text="${tempAnimal.nickName}" />
+					<td th:text="${tempAnimal.sex}" />
+					<td th:text="${tempAnimal.species}" />
+					<td th:text="${tempAnimal.price}" />
+					<td th:text="${tempAnimal.qty}" />
+					<td><a
+						th:href="@{/animals/showFormForUpdate(animalId=${tempAnimal.id})}"
+						class="btn btn-info btn-sm" sec:authorize="hasRole('ROLE_ADMIN')">Update</a>
+						<a th:href="@{/animals/delete(animalId=${tempAnimal.id})}"
+						class="btn btn-danger btn-sm"
+						sec:authorize="hasRole('ROLE_ADMIN')"
+						onclick="if(!(confirm('Are you sure you want to delete this animal?'))) return false">Delete</a>
+						<a th:href="@{/animals/purchase(animalId=${tempAnimal.id})}"
+						class="btn btn-secondary btn-sm"
+						sec:authorize="hasRole('ROLE_USER')">Purchase</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- Add a logout button -->
+		<form th:action="@{/logout}" method="POST">
+
+			<input type="submit" class="btn btn-outline-dark btn-sm"
+				value="Logout" />
+
+		</form>
+	</div>
+</body>
+
+</html>
