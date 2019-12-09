@@ -3,6 +3,7 @@ package com.badumbl.petshop.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.badumbl.petshop.entity.Animal;
+import com.badumbl.petshop.entity.User;
 import com.badumbl.petshop.service.AnimalService;
 import com.badumbl.petshop.service.UserService;
 
@@ -29,6 +31,7 @@ public class PetShopController {
 	public String listOfAnimals(Model theModel) {
 		List<Animal> theAnimals = animalService.findAll();
 		theModel.addAttribute("animals", theAnimals);
+		theModel.addAttribute("user", userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName()));
 		return "animals-list";
 	}
 

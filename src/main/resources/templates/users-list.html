@@ -19,14 +19,10 @@
 	<div class="container">
 		<h3>Animals Directory</h3>
 		<hr>
-
-		
 		<a th:href="@{/animals/list}"
 			class="btn btn-secondary btn-sm mb-3" sec:authorize="hasRole('ROLE_ADMIN')">Show Animals</a>
 			<div sec:authorize="isAuthenticated()" align="right">Logged in as: <span sec:authentication="name"></span>
 			</div>
-			 <div th:object="${session.user}" align="right">Budget: <span th:text="*{budget}" ></span>
-  </div>
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
 				<tr>

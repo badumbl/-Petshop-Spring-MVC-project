@@ -26,7 +26,7 @@
 			class="btn btn-secondary btn-sm mb-3" sec:authorize="hasRole('ROLE_ADMIN')">Show Customers</a>
 			 <div sec:authorize="isAuthenticated()" align="right">Logged in as: <span sec:authentication="name"></span>
 			</div>
-			  <div th:object="${session.user}" align="right">
+			  <div th:object="${user}" align="right">
     <p>Budget: <span th:text="*{budget}" ></span></p> 
   </div>
 		<table class="table table-bordered table-striped">
